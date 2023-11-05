@@ -4,7 +4,7 @@
 create_centos_container() {
     local num="$1"
     local user="$2"
-    local container_name="${user}-web${num}"
+    local container_name="${user}-cnt${num}"
     docker run --name "$container_name" -it -d centos:latest
     echo "Docker CentOS container '$container_name' has been created."
 }
@@ -13,7 +13,7 @@ create_centos_container() {
 create_debian_container() {
     local num="$1"
     local user="$2"
-    local container_name="${user}-web${num}"
+    local container_name="${user}-cnt${num}"
     docker run --name "$container_name" -it -d debian:11
     echo "Docker Debian container '$container_name' has been created."
 }
@@ -34,7 +34,7 @@ delete_containers() {
 
 # Check for command-line arguments
 if [ "$1" == "delete" ]; then
-    delete_containers "$(whoami)-web"
+    delete_containers "$(whoami)-cnt"
     exit
 fi
 
