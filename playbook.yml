@@ -1,0 +1,17 @@
+---
+- name: Create Users with Same Password
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Create multiple users
+      user:
+        name: "{{ item.username }}"
+        groups: "{{ item.groups }}"
+        password: "{{ common_password | password_hash('sha512') }}"
+        state: present
+      loop:
+        - { username: 'user1', groups: 'docker' }
+        - { username: 'user2', groups: 'docker' }
+  vars:
+    common_password: "ansible-training"
