@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# Function to create a CentOS container
-create_centos_container() {
+# Function to create a fedora container
+create_fedora_container() {
     local num="$1"
     local user="$2"
     local container_name="${user}-cnt${num}"
-    docker run --name "$container_name" -it -d centos:latest
-    echo "Docker CentOS container '$container_name' has been created."
+    docker run --name "$container_name" -it -d fedora:latest
+    echo "Docker fedora container '$container_name' has been created."
 }
 
 # Function to create a Debian container
@@ -48,7 +48,7 @@ user=$(whoami)
 
 for ((i = 1; i <= num_containers; i++)); do
     if [ $((i % 2)) -eq 0 ]; then
-        create_centos_container "$i" "$user"
+        create_fedora_container "$i" "$user"
     else
         create_debian_container "$i" "$user"
     fi
