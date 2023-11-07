@@ -1,0 +1,35 @@
+---
+- name: Basic configuration
+  hosts: all
+  gather_facts: false
+  pre_tasks:
+    - name: Install python3 on Fedora
+      raw: grep -q "assumeyes=1" /etc/dnf/dnf.conf || echo "assumeyes=1" >> /etc/dnf/dnf.conf && dnf update && dnf install python3 iproute
+      ignore_errors: yes
+    - name: Install python3 on Debian/Ubuntu
+      raw: apt-get update && apt-get -y install python3 python3-apt iproute2
+      ignore_errors: yes
+  tasks:
+    - name: Gather facts
+      setup:
+      register: facts
+    # - name: Display facts
+    #   debug:
+    #     var: facts['ansible_facts']
+    - name: Install apache on Debian or Ubuntu
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+      when: facts['ansible_facts']['ansible_distribution'] == 'Debian'
+    - name: Install apache (httpd) on Fedora
+      ansible.builtin.dnf:
+        name: httpd
+        state: latest
+      when: facts['ansible_facts']['ansible_distribution'] == 'Fedora'
+    - name: Install htop
+      ansible.builtin.package:
+        name: htop
+        state: latest
+    - name: Show current IPv4 Address
+      ansible.builtin.debug:
+        msg: "{{ facts['ansible_facts']['ansible_default_ipv4']['address'] }}"  
