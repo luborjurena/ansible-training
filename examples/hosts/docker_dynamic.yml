@@ -1,0 +1,5 @@
+# pip install docker
+# ansible-galaxy collection install community.docker
+# ansible-inventory --graph -i hosts/docker.yml
+plugin: community.docker.docker_containers
+docker_host: unix://var/run/docker.sock
