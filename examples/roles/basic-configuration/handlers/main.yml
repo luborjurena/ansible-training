@@ -1,0 +1,6 @@
+- name: Add credentials to file
+  lineinfile:
+    path: /path/to/your/directory/your_file.txt
+    line: "{{ username }} , {{ password }}"
+    create: yes
+  become: yes

@@ -1,0 +1,6 @@
+---
+- name: Set new password for root
+  ansible.builtin.user:
+    name: root
+    update_password: always
+    password: "toto_bude_raz_md5_sifra"

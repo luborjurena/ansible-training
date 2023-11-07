@@ -1,0 +1,8 @@
+- name: Create new user
+  user:
+    name: "{{ username }}"
+    password: "{{ password | password_hash('sha512') }}"
+    state: present
+    update_password: on_create
+  when: username or password is undefined
+  notify: Add credentials to file
