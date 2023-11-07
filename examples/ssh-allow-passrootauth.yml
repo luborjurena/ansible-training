@@ -1,0 +1,18 @@
+- name: Allow password and permit root authentication
+  hosts: all
+  tasks:
+    - name: Allow password and permit root authentication
+      lineinfile:
+        dest: /etc/ssh/sshd_config
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+      with_items:
+        - {regexp: '#?\s?PasswordAuthentication', line: 'PasswordAuthentication yes'}
+        - {regexp: '#?PermitRootLogin', line: 'PermitRootLogin yes'}
+      notify:
+        - Restart ssh
+  handlers:
+    - name: Restart ssh
+      service:
+        name: ssh
+        state: restarted
