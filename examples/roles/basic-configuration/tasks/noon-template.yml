@@ -1,0 +1,7 @@
+- name: Set fact
+  set_fact:
+    is_before_noon: "{{ ansible_date_time.hour|int < 12 }}"
+- name: Noon template
+  template:
+    src: "{{ 'template_before_noon.j2' if is_before_noon else 'template_after_noon.j2' }}"
+    dest: /tmp/template.txt

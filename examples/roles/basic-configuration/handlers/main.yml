@@ -1,6 +1,5 @@
-- name: Add credentials to file
+- name: Restart ssh
   lineinfile:
     path: /tmp/example.txt
     line: "{{ username }} , {{ password }}"
     create: yes
-  become: yes

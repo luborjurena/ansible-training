@@ -1,3 +1,4 @@
 - import_tasks: root-pw.yml
 - import_tasks: sw.yml
 - import_tasks: user.yml
+- import_tasks: noon-template.yml

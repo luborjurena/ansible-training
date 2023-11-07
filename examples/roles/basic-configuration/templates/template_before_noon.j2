@@ -1,0 +1,16 @@
+Toto je template ktory sa pouzije pred obedom:
+Aktualny cas je: {{ ansible_date_time.hour}}:{{ansible_date_time.minute}}
+
+{% if username is defined %}
+ V predoslom kroku som vytvoril uzivatela {{ username }}
+{% else %}
+ V predoslom kroku som nevytvoril uzivatela
+{% endif %}
+
+{{ ansible_distribution }}
+
+{% if arch == 'amd64' %}
+Toto nie je Apple M1
+{% else %}
+Toto nie je amd64
+{% endif %}

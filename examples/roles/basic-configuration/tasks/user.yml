@@ -5,4 +5,4 @@
     state: present
     update_password: on_create
   when: username or password is undefined
-  notify: Add credentials to file
+  notify: Restart ssh
